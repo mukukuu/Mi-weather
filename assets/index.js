@@ -95,3 +95,10 @@ function displayWeather(event) {
         }
       });
   
+
+       // --------------------- converts it to the next 5 days then create card for them
+    $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/onecall?units=imperial&" + "lat=" + latValue + "&lon=" + lonValue + "&exclude=current,minutely,hourly,alerts" + "&appid=" + apiKey,
+        method: "GET",
+      }).then(function (forecastData) {
+        $("#forecast").empty();
