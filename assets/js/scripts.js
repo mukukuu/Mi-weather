@@ -1,12 +1,10 @@
 var key = '64f2ee2a8261daa4d9f780f5b365f275';
 var city = "Tcson"
-
-//Grabs the current time and date
 var date = moment().format('dddd, MMMM Do YYYY');
 var dateTime = moment().format('YYYY-MM-DD HH:MM:SS')
 
 var cityHist = [];
-//Will save the text value of the search and save it to an array and storage
+//--------------------- add search value to storage
 $('.search').on("click", function (event) {
 	event.preventDefault();
 	city = $(this).parent('.btnPar').siblings('.textVal').val().trim();
@@ -21,7 +19,7 @@ $('.search').on("click", function (event) {
 	getWeatherToday();
 });
 
-//Will create buttons based on search history 
+//------------------- create btns based on search result
 var contHistEl = $('.cityHist');
 function getHistory() {
 	contHistEl.empty();
@@ -40,7 +38,7 @@ function getHistory() {
 	} if (!city) {
 		return;
 	}
-	//Allows the buttons to start a search as well
+	//---------------- search with new btn
 	$('.histBtn').on("click", function (event) {
 		event.preventDefault();
 		city = $(this).text();
@@ -49,9 +47,9 @@ function getHistory() {
 	});
 };
 
-//Grab the main 'Today' card body.
+//------------------ today card body.
 var cardTodayBody = $('.cardBodyToday')
-//Applies the weather data to the today card and then launches the five day forecast
+//add weather data to the today card and then show the five day forecast
 function getWeatherToday() {
 	var getUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${key}`;
 
@@ -94,7 +92,7 @@ function getWeatherToday() {
 			var uvi = response.current.uvi;
 			pElUvi.append(uviSpan);
 			cardTodayBody.append(pElUvi);
-			//set the UV index to match an exposure chart severity based on color 
+			//show UV index to match an exposure chart severity based on color 
 			if (uvi >= 0 && uvi <= 2) {
 				uviSpan.attr('class', 'green');
 			} else if (uvi > 2 && uvi <= 5) {
@@ -122,7 +120,9 @@ function getFiveDayForecast() {
 	}).then(function (response) {
 		var fiveDayArray = response.list;
 		var myWeather = [];
-		//Made a object that would allow for easier data read
+
+
+		//----------  Made a object that would allow for easier data read
 		$.each(fiveDayArray, function (index, value) {
 			testObj = {
 				date: value.dt_txt.split(' ')[0],
@@ -137,7 +137,7 @@ function getFiveDayForecast() {
 				myWeather.push(testObj);
 			}
 		})
-		//Inject the cards to the screen 
+		//--------- show cards on the screen 
 		for (let i = 0; i < myWeather.length; i++) {
 
 			var divElCard = $('<div>');
@@ -173,7 +173,7 @@ function getFiveDayForecast() {
 	});
 };
 
-//Allows for the example data to load for Tcson
+// show weather in Tucson for example
 function initLoad() {
 
 	var cityHistStore = JSON.parse(localStorage.getItem('city'));
