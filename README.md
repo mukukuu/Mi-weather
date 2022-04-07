@@ -4,8 +4,9 @@
 ## deployed site: 
 https://mukukuu.github.io/Mi-weather/
 
-##APP screenshot
+## APP screenshot
 
+<img width="308" alt="Screen Shot 2022-04-06 at 9 20 01 PM" src="https://user-images.githubusercontent.com/92074903/162119470-e8e8a38e-64ad-4bb3-a566-595d3f15b24f.png">
 
 
 ## Table of contents
